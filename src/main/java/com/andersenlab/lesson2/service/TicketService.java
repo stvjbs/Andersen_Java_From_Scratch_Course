@@ -19,15 +19,6 @@ public class TicketService {
         }
     }
 
-    public Ticket addTicket(Ticket ticket) {
-        tickets.put(ticket.getId(), ticket);
-        return ticket;
-    }
-
-    public Ticket getTicketByID(String id) {
-        return tickets.get(id);
-    }
-
     public Map<String, Ticket> getTickets() {
         return tickets;
     }
