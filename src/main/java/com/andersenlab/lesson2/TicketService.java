@@ -1,4 +1,5 @@
 package com.andersenlab.lesson2;
+import java.util.ArrayList;
 
 public class TicketService {
     static final String ID = "5Gsr";
@@ -7,7 +8,7 @@ public class TicketService {
     static final long EVENT_DATE_TIMESTAMP = 1723240800;
     static final double MAX_BACKPACK_WEIGHT = 5.5;
     static final int PRICE_IN_CENTS = 20000;
-
+    private static final ArrayList<Ticket> storage = new ArrayList<>();
 
     public static void main(String[] args) {
         Ticket empty = Ticket.createTicket();
@@ -19,5 +20,20 @@ public class TicketService {
         System.out.println(empty);
         System.out.println(full);
         System.out.println(limited);
+
+        storage.add(empty);
+        storage.add(full);
+        storage.add(limited);
+
+        System.out.println(getTicketBySector(StadiumSector.B));
+    }
+
+    private static Ticket getTicketBySector (StadiumSector sector){
+        for (Ticket ticket : storage) {
+            if (ticket.getStadiumSector() == sector){
+                return ticket;
+            }
+        }
+        return null;
     }
 }

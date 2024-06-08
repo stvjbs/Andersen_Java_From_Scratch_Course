@@ -70,6 +70,10 @@ public class Ticket {
         return new Ticket();
     }
 
+    public StadiumSector getStadiumSector(){
+        return this.stadiumSector;
+    }
+
     private static void validateId(String id) {
         if (id.length() > 4) {
             throw new IllegalArgumentException("Ticket's id must contains maximum 4 characters");
