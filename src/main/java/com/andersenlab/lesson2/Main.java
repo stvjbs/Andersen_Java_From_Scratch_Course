@@ -1,6 +1,8 @@
 package com.andersenlab.lesson2;
 
 import com.andersenlab.lesson2.entity.Ticket;
+import com.andersenlab.lesson2.entity.user.Admin;
+import com.andersenlab.lesson2.entity.user.Client;
 import com.andersenlab.lesson2.service.TicketService;
 import com.andersenlab.lesson2.util.StadiumSector;
 
@@ -13,13 +15,24 @@ public class Main {
     static final int PRICE_IN_CENTS = 20000;
 
     public static void main(String[] args) {
+        Ticket empty = Ticket.createTicket();
         Ticket full = Ticket.createTicket(ID, VEGA_ARENA, EVENT_CODE,
                 EVENT_DATE_TIMESTAMP, false,
                 StadiumSector.B, MAX_BACKPACK_WEIGHT, PRICE_IN_CENTS);
-        TicketService ticketService = new TicketService();
-        ticketService.createNRandomTickets(9);
-        ticketService.addTicket(full);
-        ticketService.getTickets().values().forEach(System.out::println);
-        System.out.println(ticketService.getTicketByID(full.getId()));
+        Ticket limited = Ticket.createTicket(VEGA_ARENA, EVENT_CODE, EVENT_DATE_TIMESTAMP);
+
+        Admin admin = new Admin();
+        Client client = new Client();
+
+        System.out.println(empty);
+        System.out.println(full);
+        System.out.println(limited);
+
+        full.share("+48346834858");
+        full.print();
+
+        admin.printRole();
+        client.printRole();
+        admin.checkTicket(client.getTicket());
     }
 }
